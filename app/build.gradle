@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 10
+    compileSdkVersion 21
     buildToolsVersion "21.1.0"
 
     defaultConfig {
         applicationId "com.example.alarmtest"
         minSdkVersion 10
-        targetSdkVersion 19
+        targetSdkVersion 14
     }
 
     buildTypes {
@@ -23,4 +23,7 @@ dependencies {
     compile files('libs/android-integration-3.1.0.jar')
     compile files('libs/coolcloud-uac-sdk.1.0.0.jar')
     compile files('libs/zxing-core-3.1.0.jar')
+    compile 'com.android.support:cardview-v7:21.0.+'
+    compile 'com.android.support:recyclerview-v7:21.0.+'
+    compile project(':pluginlib')
 }

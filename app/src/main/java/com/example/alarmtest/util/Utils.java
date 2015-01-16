@@ -1,5 +1,8 @@
 package com.example.alarmtest.util;
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.os.Build;
+
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
@@ -95,5 +98,16 @@ public class Utils {
         } catch (Exception ex) { } // for now eat exceptions
         return "";
     }
-
+    /**
+     * returns the bytesize of the give bitmap
+     */
+    public static int byteSizeOf(Bitmap bitmap) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return bitmap.getAllocationByteCount();
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR1) {
+            return bitmap.getByteCount();
+        } else {
+            return bitmap.getRowBytes() * bitmap.getHeight();
+        }
+    }
 }

@@ -6,7 +6,9 @@ import android.view.ViewGroup;
 import android.webkit.ConsoleMessage;
 import android.webkit.WebChromeClient;
 import android.webkit.WebView;
-	/** 
+import android.webkit.WebViewClient;
+
+    /**
  * 类说明：   
  * @author  mingchunhu
  * @date    2014年10月15日
@@ -15,7 +17,7 @@ import android.webkit.WebView;
 public class WebviewUtil {
 	protected static final String TAG = "WebviewUtil";
 
-	public static void showWebView(Context context, ViewGroup container) {
+	public static WebView showWebView(Context context, ViewGroup container) {
 		WebView view = new WebView(context);
 		view.setWebChromeClient(new WebChromeClient(){
 			@Override
@@ -24,9 +26,27 @@ public class WebviewUtil {
 				return super.onConsoleMessage(consoleMessage);
 			}
 		});
+        view.getSettings().setJavaScriptEnabled(true);
+
+        view.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                Log.v(TAG, "url:" + url);
+                return super.shouldOverrideUrlLoading(view, url);
+            }
+
+            @Override
+            public void onLoadResource(WebView view, String url) {
+                super.onLoadResource(view, url);
+                Log.d(TAG, "loadResource: url:" + url);
+            }
+        });
+
+
 		container.removeAllViews();
 		container.addView(view);
 //		view.loadUrl("file:///android_asset/geo.html");
-        view.loadUrl("http://m.sogou.com/web/searchList.jsp?pid=sogou-wsse-e1021d43911ca2c1&keyword=%26%2322269%3B%26%2336275%3Bvs%26%2326032%3B%26%2335199%3B%26%2320848%3B");
+        view.loadUrl("http://info.3g.qq.com/g/s?id=ent_20150106023125&aid=ent_ss&g_f=23792");
+        return view;
 	}
 }

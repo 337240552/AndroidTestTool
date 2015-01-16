@@ -28,9 +28,9 @@ public class CmwapDownload {
 		long start = System.currentTimeMillis();
 		try {
 			Log.v(TAG, "start to download...");
-			URL url = new URL("http://www.baidu.com/img/baidu_logo.gif");
+			URL url = new URL("http://111.13.100.92/img/baidu_logo.gif");
 			Proxy proxy = new Proxy(Proxy.Type.HTTP, new InetSocketAddress("10.0.0.172", 80));
-			conn = (HttpURLConnection) url.openConnection(proxy);
+			conn = (HttpURLConnection) url.openConnection(/*proxy*/);
 			conn.setDoInput(true);
 			conn.connect();
 			is = conn.getInputStream();
@@ -41,8 +41,10 @@ public class CmwapDownload {
 				view.setImageBitmap(bitmap);
 			}
 		} catch (MalformedURLException e) {
+            Log.e(TAG, "", e);
 			e.printStackTrace();
 		} catch (IOException e) {
+            Log.e(TAG, "", e);
 			e.printStackTrace();
 		} finally {
 			if (is != null) {
